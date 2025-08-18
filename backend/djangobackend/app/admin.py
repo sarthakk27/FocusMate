@@ -1,7 +1,31 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 from .models import UserProfile, Note, DailyPlan, StudySession, Goal, Reminder
 
 # Register your models here.
+
+# Unregister the default User admin and register a custom one
+admin.site.unregister(User)
+
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    can_delete = False
+    verbose_name_plural = 'Profile'
+
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active', 'date_joined')
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'date_joined')
+    search_fields = ('username', 'first_name', 'last_name', 'email')
+    ordering = ('-date_joined',)
+    inlines = (UserProfileInline,)
+    
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        # Ensure UserProfile exists
+        if not hasattr(obj, 'profile'):
+            UserProfile.objects.create(user=obj)
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
