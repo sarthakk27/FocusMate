@@ -1,0 +1,27 @@
+{
+  "name": "studyfocus-app",
+  "version": "1.0.0",
+  "description": "A full-stack student focus application with Django and React",
+  "scripts": {
+    "setup": "cd backend/djangobackend && python manage.py migrate && echo 'Backend setup complete'",
+    "start:backend": "cd backend/djangobackend && python manage.py runserver",
+    "start:frontend": "cd frontend/reactapp && npm start",
+    "install:frontend": "cd frontend/reactapp && npm install axios react-router-dom",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+  },
+  "keywords": [
+    "django",
+    "react",
+    "education",
+    "student",
+    "productivity"
+  ],
+  "author": "StudyFocus Team",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^19.1.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
