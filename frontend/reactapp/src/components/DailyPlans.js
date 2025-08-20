@@ -1,37 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Chip,
-  IconButton,
-  Box,
-  Alert,
-  Fab,
-} from '@mui/material';
-import {
-  Add,
-  Edit,
-  Delete,
-  CheckCircle,
-  RadioButtonUnchecked,
-  Today,
-} from '@mui/icons-material';
+// All MUI imports removed. Use HTML and CSS instead.
+// All MUI icon imports removed. Use Unicode or SVG alternatives.
 import { dailyPlansService } from '../services/api';
 
 const DailyPlans = () => {
@@ -164,266 +133,143 @@ const DailyPlans = () => {
 
   if (loading) {
     return (
-      <Container sx={{ mt: 4 }}>
-        <Typography>Loading daily plans...</Typography>
-      </Container>
+      <div className="container" style={{ marginTop: '2rem' }}>
+        <h2>Loading daily plans...</h2>
+      </div>
     );
   }
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-          <Typography variant="h4" gutterBottom>
-            Daily Plans
-          </Typography>
-          <Button
-            variant="contained"
-            startIcon={<Add />}
-            onClick={() => handleOpenDialog()}
-          >
-            Add Plan
-          </Button>
-        </Box>
+    <div className="container" style={{ maxWidth: '1200px', margin: '2rem auto', padding: '2rem' }}>
+      <div className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <h2 style={{ margin: 0 }}>Daily Plans</h2>
+        <button className="btn" style={{ padding: '0.5rem 1.5rem', background: '#1976d2', color: 'white', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => handleOpenDialog()}>
+          + Add Plan
+        </button>
+      </div>
 
-        {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            {error}
-          </Alert>
-        )}
+      {error && (
+        <div className="alert" style={{ background: '#fdecea', color: '#d32f2f', padding: '1rem', borderRadius: '4px', marginBottom: '1rem' }}>{error}</div>
+      )}
 
-        {/* Date Selector */}
-        <Paper sx={{ p: 2, mb: 3 }}>
-          <Box display="flex" alignItems="center" gap={2}>
-            <Today />
-            <TextField
-              type="date"
-              label="Select Date"
-              value={selectedDate.toISOString().split('T')[0]}
-              onChange={(e) => setSelectedDate(new Date(e.target.value))}
-              InputLabelProps={{ shrink: true }}
-            />
-            <Typography variant="body1">
-              {plans.length} plans for {selectedDate.toLocaleDateString()}
-            </Typography>
-          </Box>
-        </Paper>
+      {/* Date Selector */}
+      <div className="date-selector" style={{ background: '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <span style={{ fontSize: '1.5rem' }}></span>
+        <input type="date" value={selectedDate.toISOString().split('T')[0]} onChange={(e) => setSelectedDate(new Date(e.target.value))} style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
+        <span style={{ fontSize: '1rem' }}>{plans.length} plans for {selectedDate.toLocaleDateString()}</span>
+      </div>
 
-        <Grid container spacing={3}>
-          {/* Pending Plans */}
-          <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                Pending Plans ({pendingPlans.length})
-              </Typography>
-              {pendingPlans.length > 0 ? (
-                <List>
-                  {pendingPlans.map((plan) => (
-                    <ListItem key={plan.id} divider>
-                      <IconButton
-                        onClick={() => toggleCompletion(plan)}
-                        color="primary"
-                      >
-                        <RadioButtonUnchecked />
-                      </IconButton>
-                      <ListItemText
-                        primary={
-                          <Box display="flex" alignItems="center" gap={1}>
-                            <Typography variant="body1">
-                              {plan.title}
-                            </Typography>
-                            <Chip
-                              label={plan.priority}
-                              size="small"
-                              color={getPriorityColor(plan.priority)}
-                            />
-                          </Box>
-                        }
-                        secondary={
-                          <Box>
-                            <Typography variant="body2">
-                              {plan.description}
-                            </Typography>
-                            {plan.estimated_duration && (
-                              <Typography variant="caption" color="text.secondary">
-                                Estimated: {plan.estimated_duration} minutes
-                              </Typography>
-                            )}
-                          </Box>
-                        }
-                      />
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          edge="end"
-                          onClick={() => handleOpenDialog(plan)}
-                          color="primary"
-                          sx={{ mr: 1 }}
-                        >
-                          <Edit />
-                        </IconButton>
-                        <IconButton
-                          edge="end"
-                          onClick={() => handleDelete(plan.id)}
-                          color="error"
-                        >
-                          <Delete />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
+      <div className="plans-grid" style={{ display: 'flex', gap: '2rem' }}>
+        {/* Pending Plans */}
+        <div className="pending-plans" style={{ flex: 1, background: '#fff', borderRadius: '8px', padding: '1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+          <h3 style={{ marginBottom: '1rem' }}>Pending Plans ({pendingPlans.length})</h3>
+          {pendingPlans.length > 0 ? (
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              {pendingPlans.map((plan) => (
+                <li key={plan.id} style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #eee', padding: '0.75rem 0' }}>
+                  <button title="Mark as completed" style={{ background: 'none', border: 'none', color: '#1976d2', fontSize: '1.2rem', marginRight: '0.5rem', cursor: 'pointer' }} onClick={() => toggleCompletion(plan)}>
+                    ○
+                  </button>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>{plan.title}</span>
+                      <span style={{ fontSize: '0.85rem', background: getPriorityColor(plan.priority), color: '#fff', borderRadius: '12px', padding: '0.2rem 0.7rem' }}>{plan.priority}</span>
+                    </div>
+                    <div style={{ fontSize: '0.95rem', color: '#555' }}>{plan.description}</div>
+                    {plan.estimated_duration && (
+                      <div style={{ fontSize: '0.8rem', color: '#888' }}>Estimated: {plan.estimated_duration} minutes</div>
+                    )}
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button title="Edit" style={{ background: 'none', border: 'none', color: '#1976d2', fontSize: '1.2rem', cursor: 'pointer' }} onClick={() => handleOpenDialog(plan)}>
+                      ✎
+                    </button>
+                    <button title="Delete" style={{ background: 'none', border: 'none', color: '#d32f2f', fontSize: '1.2rem', cursor: 'pointer' }} onClick={() => handleDelete(plan.id)}>
+                      🗑
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div style={{ color: '#888', textAlign: 'center', padding: '2rem 0' }}>No pending plans for this date</div>
+          )}
+        </div>
+
+        {/* Completed Plans */}
+        <div className="completed-plans" style={{ flex: 1, background: '#fff', borderRadius: '8px', padding: '1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+          <h3 style={{ marginBottom: '1rem' }}>Completed Plans ({completedPlans.length})</h3>
+          {completedPlans.length > 0 ? (
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              {completedPlans.map((plan) => (
+                <li key={plan.id} style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #eee', padding: '0.75rem 0' }}>
+                  <button title="Mark as pending" style={{ background: 'none', border: 'none', color: '#388e3c', fontSize: '1.2rem', marginRight: '0.5rem', cursor: 'pointer' }} onClick={() => toggleCompletion(plan)}>
+                    ●
+                  </button>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '1rem', textDecoration: 'line-through', color: '#888' }}>{plan.title}</span>
+                      <span style={{ fontSize: '0.85rem', background: getPriorityColor(plan.priority), color: '#fff', borderRadius: '12px', padding: '0.2rem 0.7rem' }}>{plan.priority}</span>
+                    </div>
+                    <div style={{ fontSize: '0.95rem', color: '#555' }}>{plan.description}</div>
+                    {plan.completed_at && (
+                      <div style={{ fontSize: '0.8rem', color: '#888' }}>Completed: {new Date(plan.completed_at).toLocaleString()}</div>
+                    )}
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button title="Delete" style={{ background: 'none', border: 'none', color: '#d32f2f', fontSize: '1.2rem', cursor: 'pointer' }} onClick={() => handleDelete(plan.id)}>
+                      🗑
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div style={{ color: '#888', textAlign: 'center', padding: '2rem 0' }}>No completed plans for this date</div>
+          )}
+        </div>
+      </div>
+
+      {/* Add/Edit Dialog */}
+      {openDialog && (
+        <div className="dialog-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div className="dialog" style={{ background: '#fff', borderRadius: '8px', padding: '2rem', minWidth: '350px', maxWidth: '400px', boxShadow: '0 4px 24px rgba(0,0,0,0.15)' }}>
+            <h3 style={{ marginBottom: '1rem' }}>{editingPlan ? 'Edit Plan' : 'Create New Plan'}</h3>
+            <form onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem' }}>Title</label>
+                <input type="text" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} required />
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem' }}>Description</label>
+                <textarea value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', minHeight: '60px' }} />
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem' }}>Priority</label>
+                <select value={formData.priority} onChange={e => setFormData({ ...formData, priority: e.target.value })} style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }}>
+                  {priorities.map(priority => (
+                    <option key={priority.value} value={priority.value}>{priority.label}</option>
                   ))}
-                </List>
-              ) : (
-                <Typography color="text.secondary" textAlign="center" py={4}>
-                  No pending plans for this date
-                </Typography>
-              )}
-            </Paper>
-          </Grid>
-
-          {/* Completed Plans */}
-          <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                Completed Plans ({completedPlans.length})
-              </Typography>
-              {completedPlans.length > 0 ? (
-                <List>
-                  {completedPlans.map((plan) => (
-                    <ListItem key={plan.id} divider>
-                      <IconButton
-                        onClick={() => toggleCompletion(plan)}
-                        color="success"
-                      >
-                        <CheckCircle />
-                      </IconButton>
-                      <ListItemText
-                        primary={
-                          <Box display="flex" alignItems="center" gap={1}>
-                            <Typography
-                              variant="body1"
-                              sx={{ textDecoration: 'line-through', color: 'text.secondary' }}
-                            >
-                              {plan.title}
-                            </Typography>
-                            <Chip
-                              label={plan.priority}
-                              size="small"
-                              color={getPriorityColor(plan.priority)}
-                            />
-                          </Box>
-                        }
-                        secondary={
-                          <Box>
-                            <Typography variant="body2" color="text.secondary">
-                              {plan.description}
-                            </Typography>
-                            {plan.completed_at && (
-                              <Typography variant="caption" color="text.secondary">
-                                Completed: {new Date(plan.completed_at).toLocaleString()}
-                              </Typography>
-                            )}
-                          </Box>
-                        }
-                      />
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          edge="end"
-                          onClick={() => handleDelete(plan.id)}
-                          color="error"
-                        >
-                          <Delete />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  ))}
-                </List>
-              ) : (
-                <Typography color="text.secondary" textAlign="center" py={4}>
-                  No completed plans for this date
-                </Typography>
-              )}
-            </Paper>
-          </Grid>
-        </Grid>
-
-        {/* Floating Action Button */}
-        <Fab
-          color="primary"
-          aria-label="add"
-          sx={{ position: 'fixed', bottom: 16, right: 16 }}
-          onClick={() => handleOpenDialog()}
-        >
-          <Add />
-        </Fab>
-
-        {/* Add/Edit Dialog */}
-        <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
-          <DialogTitle>
-            {editingPlan ? 'Edit Plan' : 'Create New Plan'}
-          </DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Title"
-              fullWidth
-              variant="outlined"
-              value={formData.title}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              margin="dense"
-              label="Description"
-              fullWidth
-              multiline
-              rows={3}
-              variant="outlined"
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              sx={{ mb: 2 }}
-            />
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>Priority</InputLabel>
-              <Select
-                value={formData.priority}
-                label="Priority"
-                onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-              >
-                {priorities.map((priority) => (
-                  <MenuItem key={priority.value} value={priority.value}>
-                    {priority.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <TextField
-              label="Planned Date"
-              type="date"
-              value={formData.planned_date.toISOString().split('T')[0]}
-              onChange={(e) => setFormData({ ...formData, planned_date: new Date(e.target.value) })}
-              fullWidth
-              sx={{ mb: 2 }}
-              InputLabelProps={{ shrink: true }}
-            />
-            <TextField
-              margin="dense"
-              label="Estimated Duration (minutes)"
-              type="number"
-              fullWidth
-              variant="outlined"
-              value={formData.estimated_duration}
-              onChange={(e) => setFormData({ ...formData, estimated_duration: e.target.value })}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDialog}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="contained">
-              {editingPlan ? 'Update' : 'Create'}
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Container>
-    );
-  };
+                </select>
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem' }}>Planned Date</label>
+                <input type="date" value={formData.planned_date.toISOString().split('T')[0]} onChange={e => setFormData({ ...formData, planned_date: new Date(e.target.value) })} style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem' }}>Estimated Duration (minutes)</label>
+                <input type="number" value={formData.estimated_duration} onChange={e => setFormData({ ...formData, estimated_duration: e.target.value })} style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '2rem' }}>
+                <button type="button" className="btn" style={{ padding: '0.5rem 1.5rem', background: '#eee', color: '#333', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }} onClick={handleCloseDialog}>Cancel</button>
+                <button type="submit" className="btn" style={{ padding: '0.5rem 1.5rem', background: '#1976d2', color: 'white', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}>{editingPlan ? 'Update' : 'Create'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default DailyPlans;

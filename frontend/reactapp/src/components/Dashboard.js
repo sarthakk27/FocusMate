@@ -154,12 +154,7 @@ const Dashboard = () => {
           color="#ed6c02"
         />
         
-        <StatCard
-          title="Upcoming Reminders"
-          value={dashboardData?.upcoming_reminders || 0}
-          icon=""
-          color="#d32f2f"
-        />
+  {/* Removed Upcoming Reminders card */}
       </div>
       
       <div style={{ 

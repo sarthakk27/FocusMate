@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:8000/api';
 
-// Create axios instance with default config
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
@@ -11,7 +11,7 @@ const api = axios.create({
   },
 });
 
-// Function to get CSRF token
+
 const getCSRFToken = async () => {
   try {
     await axios.get('http://localhost:8000/api/csrf-token/', { withCredentials: true });
@@ -20,11 +20,11 @@ const getCSRFToken = async () => {
   }
 };
 
-// Add CSRF token to requests
+
 api.interceptors.request.use(async (config) => {
   const csrfToken = getCookie('csrftoken');
   if (!csrfToken) {
-    // Try to get CSRF token if not present
+
     await getCSRFToken();
   }
   const token = getCookie('csrftoken');

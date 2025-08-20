@@ -241,9 +241,9 @@ const StudySessions = () => {
                   {session.notes || 'No notes'}
                 </Typography>
 
-                <Typography variant="caption" color="text.secondary">
-                  {new Date(session.session_date).toLocaleString()}
-                </Typography>
+                <span style={{ fontSize: '0.85rem', color: '#888' }}>
+                  {new Date(session.session_date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', year: 'numeric', month: 'short', day: 'numeric' })}
+                </span>
               </CardContent>
             </Card>
           </Grid>
