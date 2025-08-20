@@ -122,42 +122,42 @@ const Dashboard = () => {
         <StatCard
           title="Total Notes"
           value={dashboardData?.total_notes || 0}
-          icon="📝"
+          icon=""
           color="#1976d2"
         />
         
         <StatCard
           title="Today's Plans"
           value={`${dashboardData?.completed_plans_today || 0}/${dashboardData?.total_daily_plans || 0}`}
-          icon="📅"
+          icon=""
           color="#9c27b0"
         />
         
         <StatCard
           title="Study Time (hrs)"
           value={Math.round((dashboardData?.total_study_time || 0) / 60 * 10) / 10}
-          icon="🎓"
+          icon=""
           color="#0288d1"
         />
         
         <StatCard
           title="Active Goals"
           value={dashboardData?.active_goals || 0}
-          icon="🎯"
+          icon=""
           color="#2e7d32"
         />
         
         <StatCard
           title="Study Sessions"
           value={dashboardData?.total_study_sessions || 0}
-          icon="📈"
+          icon=""
           color="#ed6c02"
         />
         
         <StatCard
           title="Upcoming Reminders"
           value={dashboardData?.upcoming_reminders || 0}
-          icon="🔔"
+          icon=""
           color="#d32f2f"
         />
       </div>

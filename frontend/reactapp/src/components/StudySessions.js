@@ -25,7 +25,6 @@ import {
   Delete,
   School,
   AccessTime,
-  Star,
 } from '@mui/icons-material';
 import { studySessionsService } from '../services/api';
 
@@ -39,7 +38,7 @@ const StudySessions = () => {
     subject: '',
     duration_minutes: '',
     notes: '',
-    rating: null,
+  // rating: null,
     session_date: new Date().toISOString().slice(0, 16),
   });
 
@@ -131,12 +130,7 @@ const StudySessions = () => {
     return sessions.reduce((total, session) => total + session.duration_minutes, 0);
   };
 
-  const getAverageRating = () => {
-    const ratedSessions = sessions.filter(session => session.rating);
-    if (ratedSessions.length === 0) return 0;
-    const totalRating = ratedSessions.reduce((total, session) => total + session.rating, 0);
-    return (totalRating / ratedSessions.length).toFixed(1);
-  };
+  // Removed rating logic
 
   if (loading) {
     return (
@@ -203,23 +197,7 @@ const StudySessions = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <Card>
-            <CardContent>
-              <Box display="flex" alignItems="center" gap={2}>
-                <Star color="warning" />
-                <Box>
-                  <Typography color="textSecondary" gutterBottom>
-                    Average Rating
-                  </Typography>
-                  <Typography variant="h5">
-                    {getAverageRating()}/5
-                  </Typography>
-                </Box>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
+  {/* Removed rating card */}
       </Grid>
 
       {/* Sessions Grid */}
@@ -257,14 +235,7 @@ const StudySessions = () => {
                   </Typography>
                 </Box>
 
-                {session.rating && (
-                  <Box display="flex" alignItems="center" gap={1} mb={1}>
-                    <Rating value={session.rating} readOnly size="small" />
-                    <Typography variant="body2">
-                      ({session.rating}/5)
-                    </Typography>
-                  </Box>
-                )}
+                {/* Removed session rating display */}
 
                 <Typography variant="body2" color="text.secondary" paragraph>
                   {session.notes || 'No notes'}
@@ -345,17 +316,7 @@ const StudySessions = () => {
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
             sx={{ mb: 2 }}
           />
-          <Box sx={{ mb: 2 }}>
-            <Typography component="legend" gutterBottom>
-              Rate this session
-            </Typography>
-            <Rating
-              value={formData.rating}
-              onChange={(event, newValue) => {
-                setFormData({ ...formData, rating: newValue });
-              }}
-            />
-          </Box>
+          {/* Removed rating input from dialog */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancel</Button>

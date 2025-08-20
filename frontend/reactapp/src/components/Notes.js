@@ -219,7 +219,7 @@ const Notes = () => {
                   fontSize: '1.25rem'
                 }}
               >
-                ✕
+                X
               </button>
             </div>
             <div style={{

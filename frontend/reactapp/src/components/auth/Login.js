@@ -43,7 +43,7 @@ const Login = () => {
       borderRadius: '8px',
       boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
     }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Login to StudyFocus</h2>
+  <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Login to FocusMate</h2>
       
       {error && (
         <div style={{
@@ -106,7 +106,7 @@ const Login = () => {
           style={{
             width: '100%',
             padding: '0.75rem',
-            backgroundColor: '#1976d2',
+            backgroundColor: 'black',
             color: 'white',
             border: 'none',
             borderRadius: '4px',

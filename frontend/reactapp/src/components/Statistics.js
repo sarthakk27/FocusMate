@@ -1,19 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Card,
-  CardContent,
-  Box,
-  Alert,
-  LinearProgress,
-  List,
-  ListItem,
-  ListItemText,
-  Chip,
-} from '@mui/material';
+import { Container, Grid, Paper, Typography, Card, CardContent, Box, Alert, LinearProgress, List, ListItem, ListItemText, Chip } from '@mui/material';
 import {
   TrendingUp,
   School,
@@ -107,7 +93,7 @@ const Statistics = () => {
           <StatCard
             title="Total Sessions"
             value={studyStats?.total_sessions || 0}
-            icon={<School fontSize="large" />}
+            icon={null}
             color="primary"
           />
         </Grid>
@@ -115,7 +101,7 @@ const Statistics = () => {
           <StatCard
             title="Total Time"
             value={`${Math.round((studyStats?.total_minutes || 0) / 60 * 10) / 10}h`}
-            icon={<Timer fontSize="large" />}
+            icon={null}
             color="secondary"
           />
         </Grid>
@@ -123,7 +109,7 @@ const Statistics = () => {
           <StatCard
             title="Avg Session"
             value={`${studyStats?.average_session_length || 0}min`}
-            icon={<TrendingUp fontSize="large" />}
+            icon={null}
             color="success"
           />
         </Grid>
@@ -131,7 +117,7 @@ const Statistics = () => {
           <StatCard
             title="Daily Avg"
             value={`${Math.round((studyStats?.total_minutes || 0) / 7 / 60 * 10) / 10}h`}
-            icon={<Today fontSize="large" />}
+            icon={null}
             color="warning"
           />
         </Grid>
@@ -176,7 +162,7 @@ const Statistics = () => {
         )}
       </Paper>
 
-      {/* Productivity Statistics */}
+      {/* Productivity Statistics
       <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
         Productivity Overview
       </Typography>
@@ -237,7 +223,7 @@ const Statistics = () => {
             </CardContent>
           </Card>
         </Grid>
-      </Grid>
+      </Grid> */}
 
       {/* Performance Insights */}
       <Paper sx={{ p: 3 }}>
@@ -246,7 +232,7 @@ const Statistics = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <Box p={2} bgcolor="primary.light" borderRadius={2} color="primary.contrastText">
+            <Box p={2} bgcolor="lightblue" borderRadius={2} color="primary.contrastText">
               <Typography variant="subtitle1" gutterBottom>
                 Study Consistency
               </Typography>
@@ -259,7 +245,7 @@ const Statistics = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Box p={2} bgcolor="secondary.light" borderRadius={2} color="secondary.contrastText">
+            <Box p={2} bgcolor="lightblue" borderRadius={2} color="secondary.contrastText">
               <Typography variant="subtitle1" gutterBottom>
                 Task Completion
               </Typography>
@@ -272,7 +258,7 @@ const Statistics = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Box p={2} bgcolor="success.light" borderRadius={2} color="success.contrastText">
+            <Box p={2} bgcolor="lightblue" borderRadius={2} color="success.contrastText">
               <Typography variant="subtitle1" gutterBottom>
                 Study Duration
               </Typography>
@@ -280,19 +266,6 @@ const Statistics = () => {
                 {(studyStats?.average_session_length || 0) >= 45
                   ? "Good focus! Your study sessions are well-paced."
                   : "Consider longer study sessions for better focus."
-                }
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Box p={2} bgcolor="warning.light" borderRadius={2} color="warning.contrastText">
-              <Typography variant="subtitle1" gutterBottom>
-                Weekly Goal
-              </Typography>
-              <Typography variant="body2">
-                {(studyStats?.total_minutes || 0) >= 600
-                  ? "You've met your weekly study goal!"
-                  : `Aim for ${Math.max(0, 600 - (studyStats?.total_minutes || 0))} more minutes this week.`
                 }
               </Typography>
             </Box>

@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <header style={{
-      backgroundColor: '#1976d2',
+      backgroundColor: 'black',
       color: 'white',
       padding: '1rem',
       display: 'flex',
@@ -33,11 +33,11 @@ const Header = () => {
       alignItems: 'center',
       boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
     }}>
-      <h1 style={{ margin: 0, fontSize: '1.5rem' }}>StudyFocus</h1>
+  <h1 style={{ margin: 0, fontSize: '1.5rem' }}>FocusMate</h1>
       
       {isAuthenticated ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <nav style={{ display: 'flex', gap: '1rem' }}>
+          <nav style={{ display: 'flex', gap: '1rem', backgroundColor: 'black' }}>
             {navigationItems.map((item) => (
               <button
                 key={item.path}
