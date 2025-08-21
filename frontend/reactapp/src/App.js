@@ -6,10 +6,13 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/Dashboard';
 import Notes from './components/Notes';
+import NoteDetail from './components/NoteDetail';
 import DailyPlans from './components/DailyPlans';
 import StudySessions from './components/StudySessions';
 import Goals from './components/Goals';
 import Statistics from './components/Statistics';
+import Home from './components/Home';
+import Profile from './components/Profile';
 import './App.css';
 
 const ProtectedRoute = ({ children }) => {
@@ -39,7 +42,7 @@ function AppRoutes() {
         <Header />
         <main style={{ padding: '20px', minHeight: 'calc(100vh - 64px)' }}>
           <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" />} />
+            <Route path="/" element={<Home />} />
             <Route 
               path="/login" 
               element={
@@ -103,6 +106,22 @@ function AppRoutes() {
                   <Statistics />
                 </ProtectedRoute>
               } 
+            />
+            <Route 
+              path="/note/:id" 
+              element={
+                <ProtectedRoute>
+                  <NoteDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
             />
           </Routes>
         </main>

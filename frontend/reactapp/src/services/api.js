@@ -114,6 +114,14 @@ export const notesService = {
     } catch (error) {
       throw error.response?.data || error.message;
     }
+    },
+    getNote: async (id) => {
+      try {
+        const response = await api.get(`/notes/${id}/`);
+        return response.data;
+      } catch (error) {
+        throw error.response?.data || error.message;
+      }
   },
 
   createNote: async (noteData) => {

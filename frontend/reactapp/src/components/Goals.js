@@ -138,7 +138,7 @@ const Goals = () => {
   const getDaysUntilTarget = (targetDate) => {
     const today = new Date();
     const target = new Date(targetDate);
-    const diffTime = target - today;
+    const diffTime = target - today; 
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays;
   };

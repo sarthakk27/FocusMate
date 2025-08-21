@@ -160,6 +160,21 @@ const Notes = () => {
                     borderRadius: '4px'
                   }}
                 />
+                <div style={{ marginTop: '0.5rem' }}>
+                  <label htmlFor="txt-upload" style={{ marginRight: '1rem' }}>Or upload .txt file:</label>
+                  <input
+                    id="txt-upload"
+                    type="file"
+                    accept=".txt"
+                    onChange={async (e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const text = await file.text();
+                        setFormData({ ...formData, content: text });
+                      }
+                    }}
+                  />
+                </div>
               </div>
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
                 <button
@@ -205,12 +220,15 @@ const Notes = () => {
             border: '1px solid #ddd',
             borderRadius: '8px',
             padding: '1.5rem',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-          }}>
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            cursor: 'pointer'
+          }}
+            onClick={() => window.open(`/note/${note.id}`, '_blank')}
+          >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
               <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#333' }}>{note.title}</h3>
               <button
-                onClick={() => handleDelete(note.id)}
+                onClick={(e) => { e.stopPropagation(); handleDelete(note.id); }}
                 style={{
                   background: 'none',
                   border: 'none',
@@ -232,10 +250,6 @@ const Notes = () => {
               marginBottom: '1rem'
             }}>
               {note.category}
-            </div>
-            <p style={{ color: '#666', lineHeight: '1.5', margin: 0 }}>{note.content}</p>
-            <div style={{ fontSize: '0.75rem', color: '#999', marginTop: '1rem' }}>
-              Updated: {new Date(note.updated_at).toLocaleDateString()}
             </div>
           </div>
         ))}
