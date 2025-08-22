@@ -19,8 +19,7 @@ const Header = () => {
     { label: 'Notes', path: '/notes' },
     { label: 'Daily Plans', path: '/daily-plans' },
     { label: 'Study Sessions', path: '/study-sessions' },
-    { label: 'Goals', path: '/goals' },
-    { label: 'Statistics', path: '/statistics' },
+    { label: 'Goals', path: '/goals' }
   ];
 
   return (

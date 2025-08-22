@@ -1,31 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Rating,
-  IconButton,
-  Box,
-  Alert,
-  Fab,
-  Chip,
-} from '@mui/material';
-import {
-  Add,
-  Edit,
-  Delete,
-  School,
-  AccessTime,
-} from '@mui/icons-material';
+import {Container,Grid,Typography,Button,Card,CardContent,Dialog,DialogTitle,DialogContent,DialogActions,TextField,Rating,IconButton,Box,Alert,Fab,Chip,} from '@mui/material';
+import {Add,Edit,Delete,School,AccessTime,} from '@mui/icons-material';
 import { studySessionsService } from '../services/api';
 
 const StudySessions = () => {

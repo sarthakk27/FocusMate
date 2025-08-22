@@ -17,7 +17,7 @@ const StatCard = ({ title, value, icon, color = '#2c3e50', colorRgb = '44, 62, 8
         <div className="stat-card-value">{value}</div>
       </div>
       <div className="stat-card-icon" style={{ color }}>
-        {icon || '📊'}
+        {icon}
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@ const Dashboard = () => {
       const data = await dashboardService.getDashboardData();
       setDashboardData(data);
     } catch (err) {
-      setError('⚠️ Failed to load dashboard data.');
+      setError(' Failed to load dashboard data.');
       console.error('Dashboard error:', err);
     } finally {
       setLoading(false);
@@ -81,16 +81,16 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-header">
-        Welcome back, {user?.first_name || user?.username}!
+        Welcome, {user?.first_name || user?.username}!
       </h1>
 
       {/* Stats Section */}
       <div className="stats-grid">
-        <StatCard title="Total Notes" value={dashboardData?.total_notes || 0} icon="📝" color="#2563eb" colorRgb="37, 99, 235" />
-        <StatCard title="Today's Plans" value={`${dashboardData?.completed_plans_today || 0}/${dashboardData?.total_daily_plans || 0}`} icon="📋" color="#7c3aed" colorRgb="124, 58, 237" />
-        <StatCard title="Study Time" value={`${Math.round((dashboardData?.total_study_time || 0) / 60 * 10) / 10}h`} icon="⏱️" color="#0891b2" colorRgb="8, 145, 178" />
-        <StatCard title="Active Goals" value={dashboardData?.active_goals || 0} icon="🎯" color="#16a34a" colorRgb="22, 163, 74" />
-        <StatCard title="Study Sessions" value={dashboardData?.total_study_sessions || 0} icon="📚" color="#ea580c" colorRgb="234, 88, 12" />
+        <StatCard title="Total Notes" value={dashboardData?.total_notes || 0}  color="#000" colorRgb="37, 99, 235" />
+        <StatCard title="Today's Plans" value={`${dashboardData?.completed_plans_today || 0}/${dashboardData?.total_daily_plans || 0}`}  color="#000" colorRgb="124, 58, 237" />
+        <StatCard title="Study Time" value={`${Math.round((dashboardData?.total_study_time || 0) / 60 * 10) / 10}h`}  color="#000" colorRgb="8, 145, 178" />
+        <StatCard title="Active Goals" value={dashboardData?.active_goals || 0}  color="#000" colorRgb="22, 163, 74" />
+        <StatCard title="Study Sessions" value={dashboardData?.total_study_sessions || 0}  color="#000" colorRgb="234, 88, 12" />
       </div>
 
       {/* Content Section */}
@@ -114,7 +114,7 @@ const Dashboard = () => {
               ))}
             </div>
           ) : (
-            <div className="empty-state">📝 No notes created yet. Start taking notes!</div>
+            <div className="empty-state"> No notes created yet. Start taking notes!</div>
           )}
         </div>
 
@@ -137,7 +137,7 @@ const Dashboard = () => {
               ))}
             </div>
           ) : (
-            <div className="empty-state">📋 No plans scheduled for today.</div>
+            <div className="empty-state"> No plans scheduled for today.</div>
           )}
         </div>
       </div>
@@ -152,17 +152,17 @@ const Dashboard = () => {
           <div className="item-list">
             {dashboardData.recent_study_sessions.map((session) => (
               <div key={session.id} className="list-item">
-                <div className="item-title">📚 {session.subject}</div>
+                <div className="item-title"> {session.subject}</div>
                 <div className="session-info">
-                  <span className="session-duration">⏱️ {session.duration_minutes} minutes</span>
-                  {session.rating && <span className="session-rating">⭐ {session.rating}/5</span>}
-                  <span className="item-date">📅 {formatDate(session.session_date)}</span>
+                  <span className="session-duration"> {session.duration_minutes} minutes</span>
+                  {session.rating && <span className="session-rating"> {session.rating}/5</span>}
+                  <span className="item-date"> {formatDate(session.session_date)}</span>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="empty-state">📚 No study sessions recorded yet.</div>
+          <div className="empty-state"> No study sessions recorded yet.</div>
         )}
       </div>
     </div>

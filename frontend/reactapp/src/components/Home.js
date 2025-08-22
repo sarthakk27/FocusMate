@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GrokChat } from '../chatbot/chat';
 const Home = () => {
   const navigate = useNavigate();
   return (

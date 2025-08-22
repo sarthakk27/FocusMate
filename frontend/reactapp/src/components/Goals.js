@@ -1,37 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  LinearProgress,
-  IconButton,
-  Box,
-  Alert,
-  Fab,
-  Chip,
-} from '@mui/material';
-import {
-  Add,
-  Edit,
-  Delete,
-  GpsFixed,
-  TrendingUp,
-} from '@mui/icons-material';
+import {Container,Grid,Typography,Button,Card,CardContent,Dialog,DialogTitle,DialogContent,DialogActions,TextField,Select,MenuItem,FormControl,InputLabel,LinearProgress,IconButton,Box,Alert,Fab,Chip,} from '@mui/material';   import {  Add,Edit,Delete,GpsFixed,TrendingUp,} from '@mui/icons-material';
 import { goalsService } from '../services/api';
-
 const Goals = () => {
   const [goals, setGoals] = useState([]);
   const [loading, setLoading] = useState(true);

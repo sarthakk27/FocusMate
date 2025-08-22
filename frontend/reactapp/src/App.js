@@ -10,9 +10,8 @@ import NoteDetail from './components/NoteDetail';
 import DailyPlans from './components/DailyPlans';
 import StudySessions from './components/StudySessions';
 import Goals from './components/Goals';
-import Statistics from './components/Statistics';
 import Home from './components/Home';
-import Profile from './components/Profile';
+
 import './App.css';
 
 const ProtectedRoute = ({ children }) => {
@@ -100,26 +99,10 @@ function AppRoutes() {
               } 
             />
             <Route 
-              path="/statistics" 
-              element={
-                <ProtectedRoute>
-                  <Statistics />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
               path="/note/:id" 
               element={
                 <ProtectedRoute>
                   <NoteDetail />
-                </ProtectedRoute>
-              }
-            />
-            <Route 
-              path="/profile" 
-              element={
-                <ProtectedRoute>
-                  <Profile />
                 </ProtectedRoute>
               }
             />

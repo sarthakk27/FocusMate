@@ -22,12 +22,12 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         validated_data.pop('password_confirm')
         name = validated_data.pop('name')
         
-        # Split name into first and last name
+        
         name_parts = name.strip().split(' ', 1)
         validated_data['first_name'] = name_parts[0]
         validated_data['last_name'] = name_parts[1] if len(name_parts) > 1 else ''
         
-        # Use email as username
+        
         validated_data['username'] = validated_data['email']
         
         user = User.objects.create_user(**validated_data)
@@ -44,7 +44,7 @@ class UserLoginSerializer(serializers.Serializer):
         password = attrs.get('password')
 
         if email and password:
-            # Use email as username for authentication
+            
             user = authenticate(username=email, password=password)
             if not user:
                 raise serializers.ValidationError('Invalid credentials')

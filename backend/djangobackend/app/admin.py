@@ -5,7 +5,8 @@ from .models import UserProfile, Note, DailyPlan, StudySession, Goal, Reminder
 
 # Register your models here.
 
-# Unregister the default User admin and register a custom one
+
+
 admin.site.unregister(User)
 
 class UserProfileInline(admin.StackedInline):
@@ -23,7 +24,7 @@ class CustomUserAdmin(UserAdmin):
     
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
-        # Ensure UserProfile exists
+        
         if not hasattr(obj, 'profile'):
             UserProfile.objects.create(user=obj)
 

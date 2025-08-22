@@ -99,7 +99,7 @@ class DashboardView(APIView):
             user=user, is_sent=False, reminder_time__gte=timezone.now()
         ).count()
         
-        # Get recent data
+        #  recent data
         recent_notes = Note.objects.filter(user=user)[:5]
         today_plans = DailyPlan.objects.filter(user=user, planned_date=today)
         recent_study_sessions = StudySession.objects.filter(user=user)[:5]
@@ -120,7 +120,7 @@ class DashboardView(APIView):
         return Response(dashboard_data)
 
 
-# Note Views
+# note veiws
 class NoteListCreateView(generics.ListCreateAPIView):
     serializer_class = NoteSerializer
     permission_classes = [IsAuthenticated]
@@ -137,7 +137,7 @@ class NoteDetailView(generics.RetrieveUpdateDestroyAPIView):
         return Note.objects.filter(user=self.request.user)
 
 
-# Daily Plan Views
+#  plan Views
 class DailyPlanListCreateView(generics.ListCreateAPIView):
     serializer_class = DailyPlanSerializer
     permission_classes = [IsAuthenticated]
@@ -165,7 +165,7 @@ class DailyPlanDetailView(generics.RetrieveUpdateDestroyAPIView):
         return super().patch(request, *args, **kwargs)
 
 
-# Study Session Views
+# session view
 class StudySessionListCreateView(generics.ListCreateAPIView):
     serializer_class = StudySessionSerializer
     permission_classes = [IsAuthenticated]
@@ -182,7 +182,7 @@ class StudySessionDetailView(generics.RetrieveUpdateDestroyAPIView):
         return StudySession.objects.filter(user=self.request.user)
 
 
-# Goal Views
+# goal views
 class GoalListCreateView(generics.ListCreateAPIView):
     serializer_class = GoalSerializer
     permission_classes = [IsAuthenticated]
@@ -199,7 +199,7 @@ class GoalDetailView(generics.RetrieveUpdateDestroyAPIView):
         return Goal.objects.filter(user=self.request.user)
 
 
-# Reminder Views
+
 class ReminderListCreateView(generics.ListCreateAPIView):
     serializer_class = ReminderSerializer
     permission_classes = [IsAuthenticated]
@@ -216,13 +216,13 @@ class ReminderDetailView(generics.RetrieveUpdateDestroyAPIView):
         return Reminder.objects.filter(user=self.request.user)
 
 
-# Statistics Views
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def study_statistics(request):
     user = request.user
     
-    # Get study statistics for the last 7 days
+    
     last_week = timezone.now().date() - timedelta(days=7)
     sessions = StudySession.objects.filter(
         user=user, 
@@ -256,13 +256,13 @@ def productivity_summary(request):
     user = request.user
     today = date.today()
     
-    # Today's productivity
+    
     today_plans = DailyPlan.objects.filter(user=user, planned_date=today)
     completed_today = today_plans.filter(is_completed=True).count()
     total_today = today_plans.count()
     completion_rate = (completed_today / total_today * 100) if total_today > 0 else 0
     
-    # This week's productivity
+
     week_start = today - timedelta(days=today.weekday())
     week_plans = DailyPlan.objects.filter(
         user=user, 
