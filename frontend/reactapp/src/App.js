@@ -40,7 +40,7 @@ function AppRoutes() {
     <Router>
       <div className="App">
         <Header />
-        <main style={{ padding: '20px', minHeight: 'calc(100vh - 64px)' }}>
+        <main style={{ }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route 

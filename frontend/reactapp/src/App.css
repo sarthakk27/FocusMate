@@ -1,3 +1,7 @@
+body{
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4ebf5 100%);
+}
+
 .App {
   text-align: center;
 }
